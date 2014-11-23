@@ -18,3 +18,8 @@ The dataset I'm writing this decoder against is from the
  - [2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz](http://sourceforge.net/projects/gnss-sdr/files/data/2013_04_04_GNSS_SIGNAL_at_CTTC_SPAIN.tar.gz/download) (_warning! 1.5 GB file_)
 
 
+# Run
+
+To run pipe the datafile in the gps.py:
+
+    $ ./gps.py < PATH_TO_DATA.dat
