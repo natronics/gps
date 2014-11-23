@@ -18,7 +18,7 @@ def stdin(decoder, time):
     :param decoder: type of data
     :param float time:
 
-    :returns: complex numpy array of requested data
+    :returns complex numpy array of requested data:
     """
 
     # Turn time into samples
