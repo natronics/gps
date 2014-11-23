@@ -20,6 +20,10 @@ The dataset I'm writing this decoder against is from the
 
 # Run
 
-To run pipe the datafile in the gps.py:
+Make sure you have dependencies:
 
-    $ ./gps.py < PATH_TO_DATA.dat
+    $ pip install -r requirements.txt
+
+To run the program, pipe the datafile into `gps.py`:
+
+    $ ./gps.py < PATH/TO/DATA.dat

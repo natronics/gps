@@ -1,0 +1,4 @@
+PythonModule==2.1.8
+argparse==1.2.1
+numpy==1.9.1
+wsgiref==0.1.2
