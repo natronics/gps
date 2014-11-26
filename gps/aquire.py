@@ -20,11 +20,10 @@ def test(sample_rate, data, sv, doppler):
     base_frequency = 1.023e6
     f = base_frequency + doppler
 
-    sat = [-1 if x==0 else x for x in SV[sv]]
     test_case = []
     for i in range(len(data)):
-        t = i * sample_rate**-1
-        test_case.append(sat[int(t*f)%1023])
+        t = i / float(sample_rate)
+        test_case.append(complex(SV[sv][int(t*f)%1023], 0))
     test_case = np.array(test_case)
 
-    return np.correlate(test_case, data, 'full')
+    return np.correlate(test_case, data, 'same')

@@ -89,4 +89,4 @@ def PRN(sv):
         ca.append((g1 + g2) % 2)
 
     # return C/A code!
-    return ca
+    return [-1 if x==0 else x for x in ca]
