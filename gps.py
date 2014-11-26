@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 from gps import data
 from gps import aquire
+import sys
 
 # read in 10 milliseconds of data assuming the spain data format
-init = data.stdin(data.SPAIN, 10e-3)
+init = data.read(sys.stdin, data.SPAIN, 10e-3)
 print "read in", len(init), "samples"
 
 # search for signal in sample
