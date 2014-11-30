@@ -90,7 +90,7 @@ def PRN(sv):
         ca.append((g1 + g2) % 2)
 
     # return C/A code!
-    return [-1 if x==0 else x for x in ca]
+    return [-1 if x==0 else 1 for x in ca]
 
 
 def sample(sv, sample_rate, length):
@@ -102,6 +102,6 @@ def sample(sv, sample_rate, length):
     samples = []
     for i in range(length):
         t = i / float(sample_rate)
-        samples.append(complex(prn[int(round(t*chiping_rate))%1023], 0))
-
+        p = prn[int(round(t*chiping_rate))%1023]
+        samples.append(complex(p, 0))
     return np.array(samples)
