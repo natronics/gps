@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import numpy as np
 
 # Define sat IDs
 SV = {
@@ -90,3 +91,17 @@ def PRN(sv):
 
     # return C/A code!
     return [-1 if x==0 else x for x in ca]
+
+
+def sample(sv, sample_rate, length):
+    """descrete sample a PRN for a satellite
+    """
+
+    chiping_rate = 1.023e6  # From GPS Spec
+    prn = PRN(sv)
+    samples = []
+    for i in range(length):
+        t = i / float(sample_rate)
+        samples.append(complex(prn[int(round(t*chiping_rate))%1023], 0))
+
+    return np.array(samples)

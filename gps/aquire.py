@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from gps import prn
+import cmath
 
-# pre-compute PRN at sample rate
-SV = {i: prn.PRN(i) for i in range(1, 33)}
-
+sats = {}
+fftdata = None
 
 def test(sample_rate, data, sv, doppler):
     """test a sample of data using a cross-correlation technique for a signal
@@ -15,15 +15,20 @@ def test(sample_rate, data, sv, doppler):
     :param float doppler: test doppler shift
 
     """
+    global fftdata
 
-    # zero doppler
-    base_frequency = 1.023e6
-    f = base_frequency + doppler
+    if sv not in sats:
+        test = prn.sample(sv, sample_rate, len(data))
+        sats[sv] = np.fft.fft(test)
 
-    test_case = []
-    for i in range(len(data)):
-        t = i / float(sample_rate)
-        test_case.append(complex(SV[sv][int(t*f)%1023], 0))
-    test_case = np.array(test_case)
+    if fftdata is None:
+        fftdata = np.fft.fft(data)
 
-    return np.correlate(test_case, data, 'same')
+    bin_width = sample_rate / float(len(data))
+
+    test_case = np.roll(sats[sv], int(round(doppler/bin_width)))
+
+    convolution = np.multiply(fftdata, test_case)
+    c = np.absolute(np.fft.ifft(convolution))
+
+    return c
