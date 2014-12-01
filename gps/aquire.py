@@ -29,5 +29,5 @@ def test(sample_rate, data, sv, doppler):
     test_case = np.roll(sats[sv], int(round(doppler/bin_width)))
 
     convolution = np.multiply(np.conj(fftdata), test_case)
-    c = np.absolute(np.fft.ifft(convolution))
-    return c
+
+    return np.absolute(np.fft.ifft(convolution))
